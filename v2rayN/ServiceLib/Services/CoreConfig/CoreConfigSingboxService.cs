@@ -989,12 +989,12 @@ public class CoreConfigSingboxService
                 });
             }
 
-            singboxConfig.route.rules.Insert(0, new()
+            singboxConfig.route.rules.Add(new()
             {
                 outbound = Global.DirectTag,
                 clash_mode = ERuleMode.Direct.ToString()
             });
-            singboxConfig.route.rules.Insert(0, new()
+            singboxConfig.route.rules.Add(new()
             {
                 outbound = Global.ProxyTag,
                 clash_mode = ERuleMode.Global.ToString()

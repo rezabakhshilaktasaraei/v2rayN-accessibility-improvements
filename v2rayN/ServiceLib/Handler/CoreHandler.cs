@@ -25,6 +25,8 @@ public class CoreHandler
         Environment.SetEnvironmentVariable(Global.V2RayLocalAsset, Utils.GetBinPath(""), EnvironmentVariableTarget.Process);
         Environment.SetEnvironmentVariable(Global.XrayLocalAsset, Utils.GetBinPath(""), EnvironmentVariableTarget.Process);
         Environment.SetEnvironmentVariable(Global.XrayLocalCert, Utils.GetBinPath(""), EnvironmentVariableTarget.Process);
+        // TODO Temporary addition to support proper use of sing-box v1.12
+        Environment.SetEnvironmentVariable("ENABLE_DEPRECATED_SPECIAL_OUTBOUNDS", "true", EnvironmentVariableTarget.Process);
 
         //Copy the bin folder to the storage location (for init)
         if (Environment.GetEnvironmentVariable(Global.LocalAppData) == "1")
@@ -280,20 +282,15 @@ public class CoreHandler
 
         if (displayLog)
         {
-            proc.OutputDataReceived += (sender, e) =>
+            void dataHandler(object sender, DataReceivedEventArgs e)
             {
                 if (e.Data.IsNotEmpty())
                 {
                     UpdateFunc(false, e.Data + Environment.NewLine);
                 }
-            };
-            proc.ErrorDataReceived += (sender, e) =>
-            {
-                if (e.Data.IsNotEmpty())
-                {
-                    UpdateFunc(false, e.Data + Environment.NewLine);
-                }
-            };
+            }
+            proc.OutputDataReceived += dataHandler;
+            proc.ErrorDataReceived += dataHandler;
         }
         proc.Start();
 

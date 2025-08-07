@@ -38,6 +38,8 @@ public class Global
     public const string PacFileName = NamespaceSample + "pac";
     public const string ProxySetOSXShellFileName = NamespaceSample + "proxy_set_osx_sh";
     public const string ProxySetLinuxShellFileName = NamespaceSample + "proxy_set_linux_sh";
+    public const string KillAsSudoOSXShellFileName = NamespaceSample + "kill_as_sudo_osx_sh";
+    public const string KillAsSudoLinuxShellFileName = NamespaceSample + "kill_as_sudo_linux_sh";
 
     public const string DefaultSecurity = "auto";
     public const string DefaultNetwork = "tcp";
@@ -507,6 +509,7 @@ public class Global
             { ECoreType.juicity, "juicity/juicity" },
             { ECoreType.brook, "txthinking/brook" },
             { ECoreType.overtls, "ShadowsocksR-Live/overtls" },
+            { ECoreType.shadowquic, "spongebob888/shadowquic" },
             { ECoreType.v2rayN, "2dust/v2rayN" },
         };
 
@@ -525,6 +528,13 @@ public class Global
         @"https://api-ipv6.ip.sb/geoip",
         @"https://api.ipapi.is",
         @""
+    ];
+
+    public static readonly List<string> OutboundTags =
+    [
+        ProxyTag,
+        DirectTag,
+        BlockTag
     ];
 
     #endregion const
